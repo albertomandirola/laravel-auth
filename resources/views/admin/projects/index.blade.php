@@ -31,10 +31,19 @@
                                 <td>{{ $project->link }}</td>
                                 <td>{{ $project->cover_image }}</td>
                                 <td>
-                                    <div class="button-container d-flex">
-                                        <a class="btn btn-warning  m-2"
-                                            href="{{ route('admin.projects.edit', ['project' => $project['id']]) }}">Edit
-                                        </a>
+                                    <div class="d-flex align-items-center">
+                                        <div>
+                                            <a href="{{ route('admin.projects.show', ['project' => $project['id']]) }}"
+                                                class="btn btn-secondary">
+                                                <i class="fa-solid fa-magnifying-glass"></i>
+                                            </a>
+                                        </div>
+                                        <div>
+                                            <a href="{{ route('admin.projects.edit', ['project' => $project['id']]) }}"
+                                                class="btn btn-warning ms-1 ">
+                                                <i class="fa-solid fa-edit"></i>
+                                            </a>
+                                        </div>
                                         <form class=" m-2"
                                             action="{{ route('admin.projects.destroy', ['project' => $project['id']]) }}"
                                             method="POST"
