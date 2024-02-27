@@ -8,6 +8,7 @@
                 <h2>{{ $project->title }}</h2>
                 <a href="{{ $project->link }}">link alla pagina git-hub</a>
                 <p>{{ $project->description }}</p>
+                <p>{{ $project->slug }}</p>
             </div>
             <div class="col-12">
                 <div class="d-flex justify-content-end align-items-center">

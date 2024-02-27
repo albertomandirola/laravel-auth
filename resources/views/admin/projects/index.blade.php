@@ -5,8 +5,8 @@
         <div class="row">
             <div class="col-12">
                 <div class="content d-flex align-items-center">
-                    <div class="fw-bold">Aggiungi un nuovo modello: </div>
-                    <a class="btn btn-primary fw-bold m-3" href="{{ Route('admin.projects.create') }}"
+                    <div class="fw-bold">Aggiungi un nuovo progetto: </div>
+                    <a class="btn btn-primary fw-bold m-3" href="{{ route('admin.projects.create') }}"
                         role="button">Aggiungi</a>
                 </div>
             </div>
@@ -15,10 +15,10 @@
                     <thead>
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Model</th>
-                            <th scope="col">Brand</th>
-                            <th scope="col">year</th>
-                            <th scope="col">Engine</th>
+                            <th scope="col">Titolo</th>
+                            <th scope="col">slug</th>
+                            <th scope="col">link</th>
+
                             <th scope="col">Tools</th>
                         </tr>
                     </thead>
@@ -29,7 +29,7 @@
                                 <td>{{ $project->title }}</td>
                                 <td>{{ $project->slug }}</td>
                                 <td>{{ $project->link }}</td>
-                                <td>{{ $project->cover_image }}</td>
+
                                 <td>
                                     <div class="d-flex align-items-center">
                                         <div>
