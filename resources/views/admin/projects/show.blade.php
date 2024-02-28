@@ -3,7 +3,9 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-4"><img src="{{ $project->cover_image }}" alt="{{ $project->title }}"></div>
+            <div class="col-4"><img class="my-2" style="width: 100%; height:300px"
+                    src="{{ asset('storage') . '/' . $project->cover_image }}" alt="{{ $project->title }}">
+            </div>
             <div class="col-8">
                 <h2>{{ $project->title }}</h2>
                 <a href="{{ $project->link }}">link alla pagina git-hub</a>
