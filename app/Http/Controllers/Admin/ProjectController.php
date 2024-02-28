@@ -41,22 +41,16 @@ class ProjectController extends Controller
      */
     public function store(StoreProjectRequest $request)
     {
-        
         $form_data = $request->all();
 
-        
         $project = new Project();
 
         $slug = Str::slug($form_data['title'], '-');
         $form_data['slug'] = $slug;
 
-        
         $project->fill($form_data);
-
-        
         $project->save();
 
-        
         return redirect()->route('admin.projects.index');
     }
 
@@ -77,9 +71,14 @@ class ProjectController extends Controller
      * @param  \App\Models\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function edit(Project $project)
+    public function edit(Project $project,Request $request)
     {
-        return view('admin.projects.edit' , compact('project'));
+        $error_message = '';
+        if (!empty($request->all())) {
+            $messages = $request->all();
+            $error_message = $messages['error_message'];
+        }
+        return view('admin.projects.edit' , compact('project','error_message'));
     }
 
     /**
@@ -91,10 +90,10 @@ class ProjectController extends Controller
      */
     public function update(UpdateProjectRequest $request, Project $project)
     {
-        $form_data = $request->validated();
+        $form_data = $request->all();
 
     // Verifica se esiste un altro progetto con lo stesso titolo
-    $exists = Project::where('title', $form_data['title'])
+    $exists = Project::where('title','LIKE', $form_data['title'])
         ->where('id', '!=', $project->id)
         ->exists();
     
