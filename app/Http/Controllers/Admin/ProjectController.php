@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateProjectRequest;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
 class ProjectController extends Controller
 {
@@ -40,22 +41,22 @@ class ProjectController extends Controller
      */
     public function store(StoreProjectRequest $request)
     {
-        // recupero i dati inviati dalla form
+        
         $form_data = $request->all();
 
-        // creo una nuova istanza del model Project
+        
         $project = new Project();
 
         $slug = Str::slug($form_data['title'], '-');
         $form_data['slug'] = $slug;
 
-        // riempio gli altri campi con la funzione fill()
+        
         $project->fill($form_data);
 
-        // salvo il record sul db
+        
         $project->save();
 
-        // effettuo il redirect alla view index
+        
         return redirect()->route('admin.projects.index');
     }
 
@@ -78,7 +79,7 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        //
+        return view('admin.projects.edit' , compact('project'));
     }
 
     /**
@@ -90,7 +91,26 @@ class ProjectController extends Controller
      */
     public function update(UpdateProjectRequest $request, Project $project)
     {
-        //
+        $form_data = $request->validated();
+
+    // Verifica se esiste un altro progetto con lo stesso titolo
+    $exists = Project::where('title', $form_data['title'])
+        ->where('id', '!=', $project->id)
+        ->exists();
+    
+    if ($exists) {
+        $error_message = 'Hai inserito un titolo già presente in un altro articolo';
+        return redirect()->route('admin.projects.edit', compact('project', 'error_message'));
+    }
+
+    // Aggiorna lo "slug" con il nuovo titolo
+    $form_data['slug'] = Str::slug($form_data['title'], '-');
+
+    // Aggiorna i dati del progetto con i nuovi dati
+    $project->update($form_data);
+
+    return redirect()->route('admin.projects.index');
+        
     }
 
     /**
@@ -101,6 +121,7 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
-        //
+       $project->delete();
+        return redirect()->route('admin.projects.index');
     }
 }

@@ -32,18 +32,18 @@
 
                                 <td>
                                     <div class="d-flex align-items-center">
-                                        <div>
-                                            <a href="{{ route('admin.projects.show', ['project' => $project['id']]) }}"
-                                                class="btn btn-secondary">
-                                                <i class="fa-solid fa-magnifying-glass"></i>
-                                            </a>
-                                        </div>
-                                        <div>
-                                            <a href="{{ route('admin.projects.edit', ['project' => $project['id']]) }}"
-                                                class="btn btn-warning ms-1 ">
-                                                <i class="fa-solid fa-edit"></i>
-                                            </a>
-                                        </div>
+
+                                        <a href="{{ route('admin.projects.show', ['project' => $project['id']]) }}"
+                                            class="btn btn-secondary">
+                                            <i class="fa-solid fa-magnifying-glass"></i>
+                                        </a>
+
+
+                                        <a href="{{ route('admin.projects.edit', ['project' => $project['id']]) }}"
+                                            class="btn btn-warning ms-1 ">
+                                            <i class="fa-solid fa-edit"></i>
+                                        </a>
+
                                         <form class=" m-2"
                                             action="{{ route('admin.projects.destroy', ['project' => $project['id']]) }}"
                                             method="POST"

@@ -13,7 +13,7 @@ class UpdateProjectRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,11 @@ class UpdateProjectRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'title' => 'required|max:50',
+            'cover_image' => 'nullable',
+            'description' => 'required',
+            'link' => 'required|max:255',
+            'slug' => 'required|unique:projects,slug,' . $this->project->id,
         ];
     }
 }
